@@ -1,0 +1,20 @@
+CXX = g++
+CXXFLAGS = -g -Wall -Wextra -Wpedantic
+
+.PHONY : all
+all : program
+
+program : numberconversion.cpp romandigitconverter.cpp numberConversion.o romandigitconverter.o
+	$(CXX) $(CXXFLAGS) -o program numberconversion.cpp romandigitconverter.cpp numberConversion.o romandigitconverter.o
+
+numberConversion.o : numberconversion.cpp numberconversion.h
+	$(CXX) $(CXXFLAGS) -c numberconversion.cpp
+
+romandigitconverter.o : romandigitconverter.cpp
+	$(CXX) $(CXXFLAGS) -c romandigitconverter.cpp
+
+.PHONY : clean
+clean:
+	rm *.o
+	rm program
+
