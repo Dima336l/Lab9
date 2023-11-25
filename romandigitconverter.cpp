@@ -19,7 +19,12 @@ int main()
     if (option == 'r') {
       std::cout << "Enter the Roman numerals to convert to digits: ";
       std::cin >> roman;
-      std::cout << roman << " in digits is " << romantoint(roman) << '\n';
+      if (romantoint(roman) != 0) {
+	std::cout << roman << " in digits is " << romantoint(roman) << '\n';
+      } else {
+	std::cout << "Invalid input" << std::endl;
+      }
+      
     } else if (option == 'd') {
       std::cout << "Enter the digits to convert to Roman numerals: ";
       std::cin >> digits;
