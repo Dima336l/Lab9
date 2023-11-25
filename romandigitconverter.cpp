@@ -1,5 +1,6 @@
 #include "numberconversion.h"
 #include <iostream>
+#include <limits>
 
 int main()
 {
@@ -15,6 +16,7 @@ int main()
     std::cout << "q : quit\n";
     std::cout << "select an option from above: ";
     std::cin >> option;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
 
     if (option == 'r') {
       std::cout << "Enter the Roman numerals to convert to digits: ";

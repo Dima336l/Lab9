@@ -24,7 +24,7 @@ int romantoint(std::string roman_numeral)
   char actualSymbol;
   char nextSymbol;
   int finalValue=0;
-  for (int i=0; i< roman_numeral.size(); i++)
+  for (size_t i=0; i< roman_numeral.size(); i++)
     {
       actualSymbol = roman_numeral[i];
       if(i+1 < roman_numeral.size())
