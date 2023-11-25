@@ -16,6 +16,7 @@ int symbol2Value(char symbol)
     return 500;
   if (symbol == 'M')
     return 1000;
+  return 0;
 }
 
 int romantoint(std::string roman_numeral)
