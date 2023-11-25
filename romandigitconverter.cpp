@@ -1,5 +1,13 @@
 #include "numberconversion.h"
 #include <iostream>
+#include <string>
+#include <limits>
+#include <algorithm>
+
+bool is_number(std::string s) {
+    return !s.empty() && std::find_if(s.begin(), s.end(), 
+        [](unsigned char c) { return !std::isdigit(c); }) == s.end();
+}
 
 int main()
 {
@@ -15,6 +23,7 @@ int main()
     std::cout << "q : quit\n";
     std::cout << "select an option from above: ";
     std::cin >> option;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
 
     if (option == 'r') {
       std::cout << "Enter the Roman numerals to convert to digits: ";
@@ -22,14 +31,22 @@ int main()
       if (romantoint(roman) != 0) {
 	std::cout << roman << " in digits is " << romantoint(roman) << '\n';
       } else {
-	std::cout << "Invalid input" << std::endl;
+	std::cout << "Invalid input, please enter a valid Roman numeral" << std::endl;
       }
       
-    } else if (option == 'd') {
-      std::cout << "Enter the digits to convert to Roman numerals: ";
-      std::cin >> digits;
-      std::cout << digits << " in Roman numerals is "
-		<< inttoroman(digits) << '\n';    
+    }else if (option == 'd') {
+            std::cout << "Enter the digits to convert to Roman numerals: ";
+            if (std::cin >> digits) {
+                if (digits != 0) {
+                    std::cout << digits << " in Roman numerals is " << inttoroman(digits) << '\n';
+                } else {
+                    std::cout << "Roman numerals representation for zero does not exist." << std::endl;
+                }
+            } else {
+                std::cout << "Invalid input. Please enter a valid number." << std::endl;
+                std::cin.clear(); // Clear the fail state
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Clear the input buffer
+            }
     } else if (option != 'q') {
       std::cout << "Invalid option. Please enter r, d or q\n";
     }
